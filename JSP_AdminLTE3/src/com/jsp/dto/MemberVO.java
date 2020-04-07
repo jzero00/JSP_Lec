@@ -9,11 +9,12 @@ public class MemberVO {
 	private String picture; // 사진파일명
 	private String authority; // 권한
 	private int enabled; // 사용여부
+	private String name;
 
 	public MemberVO() {
 	}
 
-	public MemberVO(String id, String pwd, String phone, String email, String picture, String authority, int enabled) {
+	public MemberVO(String id, String pwd, String phone, String email, String picture, String authority, int enabled, String name) {
 		super();
 		this.id = id;
 		this.pwd = pwd;
@@ -22,6 +23,17 @@ public class MemberVO {
 		this.picture = picture;
 		this.authority = authority;
 		this.enabled = enabled;
+		this.name = name;
+	}
+	
+	
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public String getId() {

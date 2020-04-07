@@ -1,15 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="Member-mapper">
+<mapper namespace="Member-Mapper">
 	
 	<select id="selectMemberById" parameterType="str" resultType="member">
 		SELECT *
 		FROM member
-		WHERE id = ${id}
+		WHERE id = #{id}
 	</select>
 	
 	<select id="selectMemberListCount" resultType="int">
 		SELECT COUNT(*)
+		FROM member
+	</select>
+	
+	<select id="selectMemberList" resultType="member">
+		SELECT *
 		FROM member
 	</select>
 	

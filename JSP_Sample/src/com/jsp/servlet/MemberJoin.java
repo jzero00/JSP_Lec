@@ -36,7 +36,6 @@ public class MemberJoin extends HttpServlet {
 		String email = request.getParameter("email");
 		String picture = request.getParameter("picture");
 		String name = request.getParameter("name");
-		System.out.println(id);
 		
 		MemberVO paramVO = new MemberVO();
 		paramVO.setAddress(address);
@@ -47,11 +46,14 @@ public class MemberJoin extends HttpServlet {
 		paramVO.setPhone(phone);
 		paramVO.setPicture(picture);
 		paramVO.setPwd(pwd);
-		 member.joinMember(paramVO);
+		int check = member.joinMember(paramVO);
 		
+		if(check == 1) {
 			HttpSession session = request.getSession();
-			session.setAttribute("loginUser", id);
-		
+			session.setAttribute("loginUser", paramVO);
+		} else {
+			url = "asdasd.jsp";
+		}
 		request.getRequestDispatcher(url).forward(request, response);
 	}
 

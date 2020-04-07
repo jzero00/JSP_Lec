@@ -31,29 +31,29 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	public List<MemberVO> getMemberList() throws SQLException {
-
-		return null;
+		List<MemberVO> memberList = memberDAO.selectMemberList();
+		return memberList;
 	}
 
 	@Override
 	public MemberVO getMember(String id) throws SQLException {
-
-		return null;
+		MemberVO member = memberDAO.selectMemberById(id);
+		return member;
 	}
 
 	@Override
 	public void regist(MemberVO member) throws SQLException {
-		
+		memberDAO.insertMember(member);
 	}
 
 	@Override
 	public void modify(MemberVO member) throws SQLException {
-		
+		memberDAO.updateMember(member);
 	}
 
 	@Override
 	public void remove(String id) throws SQLException {
-		
+		memberDAO.deleteMember(id);
 	}
 
 }

@@ -38,10 +38,10 @@ public class MemberDaoImpl implements MemberDao {
 	public int joinMember(MemberVO paramVO) {
 		int check = 0;
 		try {
-			check = (int) smc.insert("member.join", paramVO);
-			
-			
+			smc.insert("member.join", paramVO);
+			check = 1;
 		} catch (SQLException e) {
+			check = 0;
 			e.printStackTrace();
 		}
 		return check;
