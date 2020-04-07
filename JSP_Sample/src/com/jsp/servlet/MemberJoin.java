@@ -6,6 +6,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.jsp.dto.MemberVO;
 import com.jsp.service.MemberService;
@@ -24,20 +25,18 @@ public class MemberJoin extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		String id = request.getParameter("${param.id}");
-		String pwd = request.getParameter("${param.pwd}");
-		String pwdcheck = request.getParameter("${param.pwdcheck}");
-		String phone = request.getParameter("${param.phone}");
-		String address = request.getParameter("${param.address}");
-		String email = request.getParameter("${param.email}");
-		String picture = request.getParameter("${param.picture}");
-		String name = request.getParameter("${param.name}");
+		request.setCharacterEncoding("utf-8");
+		String url = "/WEB-INF/views/common/join_success.jsp";
 		
-		if(pwd != pwdcheck) {
-			String msg = "입력한 두 비밀번호가 다릅니다.";
-			request.setAttribute("msg", msg);
-			return;
-		}
+		String id = request.getParameter("id");
+		String pwd = request.getParameter("pwd");
+		String pwdcheck = request.getParameter("pwdcheck");
+		String phone = request.getParameter("phone");
+		String address = request.getParameter("address");
+		String email = request.getParameter("email");
+		String picture = request.getParameter("picture");
+		String name = request.getParameter("name");
+		System.out.println(id);
 		
 		MemberVO paramVO = new MemberVO();
 		paramVO.setAddress(address);
@@ -48,8 +47,12 @@ public class MemberJoin extends HttpServlet {
 		paramVO.setPhone(phone);
 		paramVO.setPicture(picture);
 		paramVO.setPwd(pwd);
+		 member.joinMember(paramVO);
 		
-		doGet(request, response);
+			HttpSession session = request.getSession();
+			session.setAttribute("loginUser", id);
+		
+		request.getRequestDispatcher(url).forward(request, response);
 	}
 
 }

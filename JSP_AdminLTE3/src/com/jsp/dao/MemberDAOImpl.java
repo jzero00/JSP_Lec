@@ -13,6 +13,13 @@ public class MemberDAOImpl implements MemberDAO {
 
 	// SqlSessionFactory
 	private SqlSessionFactory sessionFactory = OracleMyBatisSqlSessionFactoryBuilder.getSqlSessionFactory();
+
+	private static MemberDAOImpl instance = new MemberDAOImpl();
+	private MemberDAOImpl() {}
+	public static MemberDAOImpl getInstance() {
+		return instance;
+	}
+	
 	
 	@Override
 	public List<MemberVO> selectMemberList() throws SQLException {

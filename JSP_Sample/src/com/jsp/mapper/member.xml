@@ -11,9 +11,13 @@
 	AND pwd = #pwd#
 	</select>
 	
-<!-- 	<insert> -->
-	
-<!-- 	</insert> -->
+	<insert id="join" parameterClass="MemberVO" >
+	INSERT INTO
+	member
+	(id, pwd, name,  phone, address, email)
+	VALUES
+	(#id#, #pwd#, #name#,  #phone#, #address#, #email#)
+	</insert>
 </sqlMap>			
 
 

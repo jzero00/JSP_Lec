@@ -25,18 +25,18 @@
 		 </div>
 		 <!-- /.card-header -->
 		 <!-- form start -->
-		 <form class="form-horizontal">
+		 <form class="form-horizontal" action="join" method="post">
            <div class="card-body">
              <div class="form-group row">
                <label for="inputid" class="col-sm-3 col-form-label">이름</label>
                <div class="col-sm-6">
-                 <input type="text" class="form-control" id="name" value="${param.name}" placeholder="이름">
+                 <input type="text" class="form-control"  name="name" placeholder="이름">
                </div>
              </div>
              <div class="form-group row">
                <label for="inputid" class="col-sm-3 col-form-label">ID</label>
                <div class="col-sm-6">
-                 <input type="text" class="form-control" id="id" value="${param.id}" placeholder="ID">
+                 <input type="text" class="form-control"  name="id" placeholder="ID">
                </div>
                <div class="col-sm-3">
                  <button type="submit" class="btn btn-info">중복체크</button>
@@ -45,31 +45,31 @@
              <div class="form-group row">
                <label for="pwd" class="col-sm-3 col-form-label">비밀번호</label>
                <div class="col-sm-6">
-                 <input type="password" class="form-control" id="pwd" value="${param.pwd}" placeholder="PASSWORD">
+                 <input type="password" class="form-control"  name="pwd" placeholder="PASSWORD">
                </div>
              </div>
              <div class="form-group row">
                <label for="pwd" class="col-sm-3 col-form-label">비밀번호확인</label>
                <div class="col-sm-6">
-                 <input type="password" class="form-control" id="pwd" value="${param.pwdcheck}" placeholder="비밀번호확인">
+                 <input type="password" class="form-control" name="pwdcheck" placeholder="비밀번호확인">
                </div>
              </div>
              <div class="form-group row">
                <label for="phone" class="col-sm-3 col-form-label">전화번호</label>
                <div class="col-sm-6">
-                 <input type="text" class="form-control" id="phone" value="${param.phone}" placeholder="전화번호">
+                 <input type="text" class="form-control"  name="phone" placeholder="전화번호">
                </div>
              </div>
              <div class="form-group row">
                <label for="address" class="col-sm-3 col-form-label">주소</label>
                <div class="col-sm-9">
-                 <input type="text" class="form-control" id="address" value="${param.address}" placeholder="주소">
+                 <input type="text" class="form-control" name="address" placeholder="주소">
                </div>
              </div>
              <div class="form-group row">
                <label for="address" class="col-sm-3 col-form-label">이메일</label>
                <div class="col-sm-9">
-                 <input type="text" class="form-control" id="email" value="${param.email}" placeholder="이메일">
+                 <input type="text" class="form-control"  name="email" placeholder="이메일">
                </div>
              </div>
              <div class="form-group row">
@@ -77,7 +77,7 @@
                <div class="col-sm-9">
                  <div class="form-group">
                     <div class="custom-file">
-                      <input type="file" class="custom-file-input" id="picture" value="${param.picture}">
+                      <input type="file" class="custom-file-input" name="picture">
                       <label class="custom-file-label" for="customFile">파일 선택</label>
                     </div>
                   </div>

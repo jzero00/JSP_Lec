@@ -38,7 +38,9 @@ public class MemberDaoImpl implements MemberDao {
 	public int joinMember(MemberVO paramVO) {
 		int check = 0;
 		try {
-			check = (int) smc.insert(arg0);
+			check = (int) smc.insert("member.join", paramVO);
+			
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
