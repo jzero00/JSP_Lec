@@ -20,9 +20,9 @@ public class OracleMyBatisSqlSessionFactoryBuilder {
 			
 			sqlSessionFactory = new SqlSessionFactoryBuilder().build(reader);
 			
-			System.out.println("sqlSessioFactory 성공했습니다.");
+			System.out.println("sqlSessionFactory 성공했습니다.");
 		} catch (Exception e) {
-			System.out.println("sqlSessioFactory 실패했습니다.");
+			System.out.println("sqlSessionFactory 실패했습니다.");
 			e.printStackTrace();
 		}
 	}
