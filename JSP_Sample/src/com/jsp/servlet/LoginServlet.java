@@ -12,7 +12,7 @@ import com.jsp.dto.MemberVO;
 import com.jsp.service.MemberService;
 import com.jsp.service.MemberServiceImpl;
 
-@WebServlet("/login")
+@WebServlet("/commons/login")
 public class LoginServlet extends HttpServlet {
 	
 	private MemberService service = MemberServiceImpl.getInstance();

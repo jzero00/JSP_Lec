@@ -71,7 +71,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 	}
 	
 	function memberJoin(){
-		location.href="<%=request.getContextPath() %>/join"
+		location.href="<%=request.getContextPath() %>/member/join"
 	}
 </script>
 </html>

@@ -12,7 +12,7 @@ import com.jsp.dto.MemberVO;
 import com.jsp.service.MemberService;
 import com.jsp.service.MemberServiceImpl;
 
-@WebServlet("/join")
+@WebServlet("/member/join")
 public class MemberJoin extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
@@ -20,7 +20,7 @@ public class MemberJoin extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		request.getRequestDispatcher("/memberJoin.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/views/common/member/memberJoin.jsp").forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
