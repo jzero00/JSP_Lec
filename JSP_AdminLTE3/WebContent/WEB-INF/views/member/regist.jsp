@@ -33,7 +33,7 @@
 			<!-- form start -->
 			<div class="card">
 				<div class="register-card-body">
-					<form role="form" class="form-horizontal" action="regist.do" method="post">						
+					<form role="form" class="form-horizontal" action="regist" method="post">						
 						<input type="hidden" name="picture" />
 						<div class="input-group mb-3">
 							<div class="mailbox-attachments clearfix" style="text-align: center;">
@@ -67,6 +67,13 @@
 							<div class="col-sm-9 input-group-sm">								
 								<input class="form-control" name="pwd" type="password" class="form-control" id="pwd"
 										placeholder="20글자 영문자,숫자,특수문자 조합" />
+							</div>
+						<div class="form-group row">
+							<label for="name" class="col-sm-3" style="font-size:0.9em;">
+								<span style="color:red;font-weight:bold;">*</span>이&nbsp;&nbsp;름</label>
+							<div class="col-sm-9 input-group-sm">								
+								<input class="form-control" name="name" type="text" class="form-control" id="name"
+										placeholder="이름을 입력하세요"/>
 							</div>
 							
 						</div>	
@@ -133,6 +140,8 @@
 	<input id="oldFile" type="hidden" name="oldPicture" value="" />
 	<input type="hidden" name="checkUpload" value="0" />	
 </form>
+
 <%@ include file="/WEB-INF/views/include/open_footer.jsp" %>
 
 <%@ include file="picture_js.jsp" %>
+<%@ include file="regist_js.jsp" %>
