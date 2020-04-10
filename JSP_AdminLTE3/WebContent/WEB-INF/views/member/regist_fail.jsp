@@ -3,6 +3,6 @@
 <%@ page trimDirectiveWhitespaces="true" %>
 
 <script>
-	alert("회원 등록이 실패했습니다.");
+	alert("회원등록이 실패했습니다.");
 	history.go(-1);
 </script>

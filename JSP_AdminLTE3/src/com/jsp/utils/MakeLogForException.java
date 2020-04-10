@@ -10,19 +10,19 @@ import java.util.Date;
 import javax.servlet.http.HttpServletRequest;
 
 public class MakeLogForException {
-
-	public static void makeLog(HttpServletRequest request, Exception e) throws IOException {
+	
+	public static void makeLog(HttpServletRequest request, Exception e) throws IOException  {
 		
-		String today = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
+		String today = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());		
 		String uri = request.getRequestURI();
 		String errorMessage = e.getMessage();
 		
 		String log = today+","+uri+","+errorMessage;
 		
-		String savePath = GetUploadPath.getUploadPath("error.log").replace("/", File.separator);
+		String savePath = GetUploadPath.getUploadPath("error.log").replace("/",File.separator);
 		
-		File file = new File(savePath);
-		if(!file.exists()) {
+		File file=new File(savePath);
+		if(!file.exists()){
 			file.mkdirs();
 		}
 		
@@ -30,16 +30,22 @@ public class MakeLogForException {
 		
 		String logFilePath = savePath+fileName;
 		//파일 쓰기
-		BufferedWriter out = null;
-		try {
-			out = new BufferedWriter(new FileWriter(logFilePath, true));
+		BufferedWriter out=null;
+		try {			
+			out=new BufferedWriter(new FileWriter(logFilePath,true));
 			
-			//로그를 기록
+			//로그를 기록		
 			out.write(log);
 			out.newLine();
-		} finally {
-			if(out != null) out.close();
+		}finally {
+			if(out!=null)out.close();			
 		}
+		
+		
 	}
-	
 }
+
+
+
+
+

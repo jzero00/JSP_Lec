@@ -19,18 +19,19 @@ import com.jsp.utils.GetUploadPath;
 import com.jsp.utils.MakeFileName;
 import com.jsp.utils.MakeLogForException;
 
+
 @WebServlet("/member/picture")
 public class UploadPictureServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-    
+
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		return;
 	}
 
-	//업로드 파일 환경 설정
-	private static final int MEMORY_THRESHOLD = 1024 * 500;		//500KB
-	private static final int MAX_FILE_SIZE = 1024 * 1024 * 1; 	//1MB
-	private static final int MAX_REQUEST_SIZE = 1024 * 1024 * 2;//2MB
+	// 업로드 파일 환경 설정
+	private static final int MEMORY_THRESHOLD = 1024 * 500; // 500KB
+	private static final int MAX_FILE_SIZE = 1024 * 1024 * 1; // 1MB
+	private static final int MAX_REQUEST_SIZE = 1024 * 1024 * 2; // 2MB
+	
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException {
@@ -49,59 +50,61 @@ public class UploadPictureServlet extends HttpServlet {
 		
 		out.print(fileName);
 	}
-
-	private String saveFile(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, Exception{
-
-		// request 파일 첨부 여부 확인
-		if(!ServletFileUpload.isMultipartContent(request)) {
-			//return null;	//throw exception message 처리
+	
+	private String saveFile(HttpServletRequest request, HttpServletResponse response) 
+				throws ServletException, IOException, Exception {
+		
+	
+		// request 파일 첨부 여부 확인.
+		if (!ServletFileUpload.isMultipartContent(request)) {
+			//return null;  // throw Excepton message 처리
 			throw new Exception();
 		}
 		
-		//업로드를 위한 upload 환경설정 적용.
+		// 업로드를 위한 upload 환경설정 적용.
 		DiskFileItemFactory factory = new DiskFileItemFactory();
-		//저장을 위한 threshold memory 적용.
+		// 저장을 위한 threshold memory 적용.
 		factory.setSizeThreshold(MEMORY_THRESHOLD);
-		//임시 저장 위치 설정
+		// 임시 저장 위치 결정.
 		factory.setRepository(new File(System.getProperty("java.io.tmpdir")));
 		
 		ServletFileUpload upload = new ServletFileUpload(factory);
 		
-		//업로드 파일의 크기 적용
+		// 업로드 파일의 크기 적용.
 		upload.setFileSizeMax(MAX_FILE_SIZE);
-		
-		//업로드 request 크기 적용
+
+		// 업로드 request 크기 적용.
 		upload.setSizeMax(MAX_REQUEST_SIZE);
-		
-		//실제 저장 결오 설정.
-		String uploadPath = GetUploadPath.getUploadPath("member.picture.upload");
+
+		// 실제 저장 경로를 설정.
+		String uploadPath=GetUploadPath.getUploadPath("member.picture.upload");
 		File file = new File(uploadPath);
 		if(!file.mkdirs()) {
-			System.out.println(uploadPath + "가 이미 존재하거나 실패했습니다.");
-		}
+			System.out.println(uploadPath+"가 이미 존재하거나 실패했습니다.");
+		};
 		
-		//request로 부터 받는 파일을 추출해서 저장
-
+		// request로 부터 받는 파일을 추출해서 저장.
+		
 		List<FileItem> formItems = upload.parseRequest(request);
-		String fileName = null;
-		//파일 개수 확인
+		String fileName=null;
+		
+		// 파일 개수 확인.
 		if (formItems != null && formItems.size() > 0) {
-			for(FileItem item : formItems) {	//form items 반복하여 꺼내는 구문
-				if(!item.isFormField()) {	// 파일일 경우 해당 - 업로드된 파일 저장
-					//uuid + 구분자 + 파일명
+			for (FileItem item : formItems) { // form items 반복하여 꺼내는 구문
+				if (!item.isFormField()) {	// 파일일 경우 해당-업로드된 파일 저장		
+					// uuid+구분자+파일명
 					fileName = MakeFileName.toUUIDFileName(".jpg", "");
-					String filePath = uploadPath + File.pathSeparator + fileName;
-					File storeFile = new File (filePath);
-					
-					//local HDD에 저장.
+					String filePath = uploadPath + File.separator + fileName;
+					File storeFile = new File(filePath);
+
+					// local HDD 에 저장.				
 					item.write(storeFile);
 					
-				} else {	//oldFile 삭제
-					
+				}else { //old Picture 삭제
 					switch (item.getFieldName()) {
 					case "oldPicture":
 						String oldFileName = item.getString("utf-8");
-						File oldFile = new File(uploadPath + File.pathSeparator + oldFileName);
+						File oldFile=new File(uploadPath+File.separator+oldFileName);
 						if(oldFile.exists()) {
 							oldFile.delete();
 						}
@@ -109,10 +112,19 @@ public class UploadPictureServlet extends HttpServlet {
 					}
 				}
 			}
-		}
+		}	
 		
 		
-		return "fileName.jpg";
+		return fileName;
 	}
 
+	
 }
+
+
+
+
+
+
+
+

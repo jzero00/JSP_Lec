@@ -15,26 +15,30 @@ import com.jsp.dto.MemberVO;
 import com.jsp.service.MemberServiceImpl;
 import com.jsp.utils.ViewResolver;
 
+
 @WebServlet("/member/list")
 public class MemberListServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String url = "member/list";
+		String url="member/list";
 		
 		HttpSession session = request.getSession();
-		MemberVO loginUser = (MemberVO) session.getAttribute("loginUser");
-		
-		if(loginUser == null) {
-			url = "redirect:/commons/login";
+		MemberVO loginUser = (MemberVO)session.getAttribute("loginUser");
+		if(loginUser==null) {
+			
+			url="redirect:/commons/login";
+			
 			ViewResolver.view(request, response, url);
+			
 			return;
 		}
 		
 		try {
-		List<MemberVO> memberList = MemberServiceImpl.getInstance().getMemberList();
-		
-		request.setAttribute("memberList", memberList);
+			
+			List<MemberVO> memberList = MemberServiceImpl.getInstance().getMemberList();
+			
+			request.setAttribute("memberList", memberList);
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 			url="error/500_error";
@@ -45,6 +49,7 @@ public class MemberListServlet extends HttpServlet {
 		
 	}
 
+	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);
 	}

@@ -7,7 +7,9 @@
 <meta charset="UTF-8">
 <title></title>
 <!-- Tell the browser to be responsive to screen width -->
-<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+<meta
+	content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
+	name="viewport">
 <!-- Font Awesome -->
 <link rel="stylesheet" href="<%=request.getContextPath() %>/resources/bootstrap/plugins/fontawesome-free/css/all.min.css">
 <!-- Ionicons -->
@@ -26,6 +28,7 @@ body.login-page{
 	background-repeat:no-repeat;
 }
 </style>
+
 </head>
 <body class="hold-transition login-page">
 	<div class="login-box">
@@ -39,8 +42,7 @@ body.login-page{
 
 			<form action="<%=request.getContextPath() %>/commons/login"	method="post">
 				<div class="form-group has-feedback">
-					<input type="text" class="form-control" onkeyup="this.value=this.value.replace(/[\ㄱ-ㅎㅏ-ㅣ가-힣]/g, &#39;&#39;);" 
-							name="id" placeholder="아이디를 입력하세요." value="${param.id }">
+					<input type="text" class="form-control" name="id" placeholder="아이디를 입력하세요." value="${param.id }">
 					<span class="glyphicon glyphicon-envelope form-control-feedback"></span>
 				</div>
 				<div class="form-group has-feedback">
@@ -61,7 +63,12 @@ body.login-page{
 					<!-- /.col -->
 				</div>
 			</form>
+
+			
+
 			<a href="#" style="font-weight:bold;">아이디/패스워드 찾기</a><br> 
+			
+
 		</div>
 		<!-- /.login-box-body -->
 	  </div>	
