@@ -1,11 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page trimDirectiveWhitespaces="true"%>
-
-
-<%@ include file="/WEB-INF/views/include/open_header.jsp" %>
-
-	<!-- Content Wrapper. Contains page content -->
+<body>
+<!-- Content Wrapper. Contains page content -->
  <div class="content-wrapper">
 	<!-- Content Header (Page header) -->
 	  <section class="content-header">
@@ -148,14 +145,6 @@
 	<input type="hidden" name="checkUpload" value="0" />	
 </form>
 
-
-
-<%@ include file="/WEB-INF/views/include/open_footer.jsp" %>
-
 <%@ include file="picture_js.jsp" %>
 
-
-
-
-
-
+</body>

@@ -2,10 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ page trimDirectiveWhitespaces="true" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
-<%@ include file="/WEB-INF/views/include/open_header.jsp" %>
-
-
+<body>
   <div class="content-wrapper">
 	<!-- Content Header (Page header) -->
 	  <section class="content-header">
@@ -110,9 +107,6 @@
 	<input type="hidden" name="id" value="${member.id }" />
 </form>
 
-
-<%@ include file="/WEB-INF/views/include/open_footer.jsp" %>
-
 <script>
 	var imageURL="picture/get?picture=${member.picture}";
 	$('div#pictureView').css({'background-image':'url('+imageURL+')',
@@ -154,11 +148,5 @@
 		location.href="delete?id=${member.id}";
 	})
 </script>
-
-
-
-
-
-
-  
-  
+<%-- <%@ include file="/WEB-INF/views/include/open_footer.jsp" %> --%>
+</body>

@@ -2,10 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ page trimDirectiveWhitespaces="true" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
-<%@ include file="/WEB-INF/views/include/open_header.jsp" %>
-
-
+<body>
   <div class="content-wrapper">
 	<!-- Content Header (Page header) -->
 	  <section class="content-header">
@@ -70,7 +67,7 @@
 	                  </div>
 	               </div>
 					<div class="form-group row">
-						<label for="authority" class="col-sm-3 control-label text-center" >권 한</label>
+						<label for="authority" class="col-sm-3 control-label text-right" >권 한</label>
 						<div class="col-sm-9">
 							<select name="authority" class="form-control">
 								<option value="ROLE_USER">사용자</option>
@@ -86,7 +83,7 @@
 	                  </div>
 	                </div>
 	                <div class="form-group row">
-							<label for="phone" class="col-sm-3 control-label">전화번호</label>
+							<label for="phone" class="col-sm-3 control-label text-right">전화번호</label>
 							<div class="col-sm-9">	
 								<div class="input-group-sm">
 									<select style="width:75px;" name="phone" id="phone" class="form-control float-left">
@@ -134,10 +131,6 @@
 		</c:choose> --%>
 	
 </form>
-
-<%@ include file="/WEB-INF/views/include/open_footer.jsp" %>
-<%@ include file="picture_js.jsp" %>
-
 <script>
 	var imageURL="picture/get?picture=${member.picture}";
 	$('div#pictureView').css({'background-image':'url('+imageURL+')',
@@ -162,11 +155,5 @@
 		history.go(-1);
 	}
 </script>
-
-
-
-
-
-
-  
-  
+<%@ include file="picture_js.jsp" %>
+</body>
