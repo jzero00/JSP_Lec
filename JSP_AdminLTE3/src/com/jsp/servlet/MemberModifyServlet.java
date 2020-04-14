@@ -1,5 +1,6 @@
 package com.jsp.servlet;
 
+import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
 
@@ -13,66 +14,79 @@ import javax.servlet.http.HttpSession;
 import com.jsp.dto.MemberVO;
 import com.jsp.request.MemberRegistRequest;
 import com.jsp.service.MemberServiceImpl;
+import com.jsp.utils.GetUploadPath;
 import com.jsp.utils.ViewResolver;
 
 /**
- * Servlet implementation class MemberModifyServlet
+ * Servlet implementation class MemberModify
  */
 @WebServlet("/member/modify")
 public class MemberModifyServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-       
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("utf-8");
-
-		String id = request.getParameter("id");
-		String url = "/member/modify";
-		
-		MemberVO member = null;
+		String url="member/modify";		
+		String id=request.getParameter("id");		
+		MemberVO member=null;
 		try {
-			member = MemberServiceImpl.getInstance().getMember(id);
+			member=MemberServiceImpl.getInstance().getMember(id);
 		} catch (SQLException e) {
 			e.printStackTrace();
-			url="error/500_error";
 		}
+		
 		request.setAttribute("member", member);
 		
 		ViewResolver.view(request, response, url);
+		
 	}
 
+	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("utf-8");
+		String url="member/modify_success";
 		
 		String id=request.getParameter("id");
-		String url = "/member/modify_success";
-		
 		String pwd=request.getParameter("pwd");
-		String email=request.getParameter("email");
-		String picture=request.getParameter("picture");
-		String name = request.getParameter("name");
+		String name=request.getParameter("name");
+		String email=request.getParameter("email");		
+		String picture=request.getParameter("picture");		
 		String authority = request.getParameter("authority");
 		String[] phone = request.getParameterValues("phone");
 		
 		MemberRegistRequest memberReq = 
 				new MemberRegistRequest(id,pwd,authority,email,phone,picture,name);
-	
-		MemberVO member = memberReq.toMemberVO();
-		HttpSession session = request.getSession();
 		
-		if(session.getId() == null) {
-			return;
-		}
+		MemberVO member = memberReq.toMemberVO();
+		
+		System.out.println(member);
 		
 		try {
-			MemberServiceImpl.getInstance().modify(member);
-//			url=""
-		} catch (SQLException e) {
+			MemberServiceImpl.getInstance().modify(member);		
+
+			HttpSession session = request.getSession();
+			MemberVO loginUser=(MemberVO)session.getAttribute("loginUser");
+			if(member.getId().equals(loginUser.getId())) {
+				session.setAttribute("loginUser", member);
+			}
+			
+		} catch (SQLException e) {		
 			e.printStackTrace();
-			url="error/500_error";
+			url="member/modify_fail";
+			String oldFileName = member.getPicture();
+			String uploadPath=GetUploadPath.getUploadPath("member.picture.upload");
+			File oldFile=new File(uploadPath+File.separator+oldFileName);
+			if(oldFile.exists()) {
+				oldFile.delete();
+			}
 		}
+		
+		request.setAttribute("id", id);
 		request.setAttribute("member", member);
-	
+		
 		ViewResolver.view(request, response, url);
 	}
 
 }
+
+
+
+
+
+

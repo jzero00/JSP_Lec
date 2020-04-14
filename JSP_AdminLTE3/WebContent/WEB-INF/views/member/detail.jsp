@@ -83,9 +83,16 @@
 			          		<div class="col-sm-3text-center">
 				          		<button type="button" id="deleteBtn" class="btn btn-danger" >삭 제</button>
 			          		</div>
+			          		<c:if test="${member.enabled eq 1}">
 			          		<div class="col-sm-3 text-center">
-			          			<button type="button" id="stopBtn" class="btn btn-info" >정 지</button>
+			          			<button type="button" id="disabledBtn" class="btn btn-info" >비활성</button>
 			          		</div>
+			          		</c:if>
+			          		<c:if test="${member.enabled eq 0}">
+			          		<div class="col-sm-3 text-center">
+			          			<button type="button" id="abledBtn" class="btn btn-info" >활 성</button>
+			          		</div>
+			          		</c:if>
 			          		<div class="col-sm-3 text-center">
 			            		<button type="button" id="listBtn" onclick="CloseWindow();" class="btn btn-primary pull-right">닫 기</button>
 			            	</div>
@@ -135,8 +142,16 @@
 		})
 	});
 	
-	$('button#stopBtn').on('click', function(){
-		location.href="stop?id=${member.id}";
+	$('button#disabledBtn').on('click', function(){
+		location.href="disabled?id=${member.id}";
+	})
+	
+	$('button#abledBtn').on('click', function(){
+		location.href="abled?id=${member.id}";
+	})
+	
+	$('button#deleteBtn').on('click', function(){
+		location.href="delete?id=${member.id}";
 	})
 </script>
 

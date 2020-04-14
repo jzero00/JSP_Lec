@@ -3,26 +3,26 @@
 <mapper namespace="Member-Mapper">
 
 	<select id="selectMemberById" parameterType="str" resultType="member">
-		select * 
-		from member 
-		where id=#{id}
+		SELECT * 
+		FROM member 
+		WHERE id=#{id}
 	</select>
 	
 		
 	<select id="selectMemberList" resultType="member">
-		select * 
-		from member
+		SELECT * 
+		FROM member
 	</select>
 	
 	<select id="selectMemberListCount" resultType="int">
-		select count(*) 
-		from member
+		SELECT COUNT(*) 
+		FROM member
 	</select>
 	
 	<update id="insertMember" parameterType="member">
-		insert into 
-		member(id, pwd, email, phone,picture,name)
-		values(#{id},#{pwd},#{email},#{phone},#{picture},#{name})
+		INSERT INTO 
+		member(id, pwd, email, phone, picture, name, enabled)
+		VALUES(#{id},#{pwd},#{email},#{phone},#{picture},#{name},1)
 	</update>	
 	
 	<update id="updateMember" parameterType="member">
@@ -39,10 +39,23 @@
 	</update>
 	
 	<update id="deleteMember" parameterType="str" >
-		delete 
-		from member 
-		where id=#{id}		
+		DELETE 
+		FROM member 
+		WHERE id=#{id}		
 	</update>
+	
+	<update id="disabledMember" parameterType="str">
+		UPDATE member
+		SET enabled = 0
+		WHERE id = #{id}
+	</update>
+	
+	<update id="enabledMember" parameterType="str">
+		UPDATE member
+		SET enabled = 1
+		WHERE id = #{id}
+	</update>
+	
 	
 	
 </mapper>

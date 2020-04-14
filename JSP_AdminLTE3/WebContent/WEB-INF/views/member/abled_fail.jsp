@@ -2,7 +2,6 @@
     pageEncoding="UTF-8"%>
 <%@ page trimDirectiveWhitespaces="true" %>
 <script>
-	alert('${member.id}님의 정보가 수정되었습니다.');
-	location.href="/member/detail?id=${id}";
-	window.opener.location.href = "/member/list";
+	alert("${id}를 활성화시는데 실패했습니다.");
+	history.go(-1);
 </script>

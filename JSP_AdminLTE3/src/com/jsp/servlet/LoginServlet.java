@@ -21,7 +21,8 @@ import com.jsp.utils.ViewResolver;
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
    
-	/*public void init(ServletConfig config) throws ServletException {
+/*
+	public void init(ServletConfig config) throws ServletException {
 		System.out.println("init() execute!");
 	}
 
@@ -54,7 +55,7 @@ public class LoginServlet extends HttpServlet {
 			
 			MemberVO loginUser=MemberServiceImpl.getInstance().getMember(id);
 			session.setAttribute("loginUser", loginUser);
-			session.setMaxInactiveInterval(10*60);
+			session.setMaxInactiveInterval(60*5);
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
