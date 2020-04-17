@@ -13,60 +13,57 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import com.jsp.dto.MemberVO;
 import com.jsp.utils.ViewResolver;
 
+
 public class MemberDisabledFilter implements Filter {
 
-	private List<String> checkURLs = new ArrayList<String>();
+	private List<String> checkURLs=new ArrayList<String>();
 	
 	public void destroy() {
-
+		// TODO Auto-generated method stub
 	}
 
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
+		
 		HttpServletRequest httpReq = (HttpServletRequest) request;
 		HttpServletResponse httpResp = (HttpServletResponse) response;
 		
-		//제외할 url 확인
-		//들어오는 uri가 고정적이면 Set을 사용한다
-		String reqUrl = httpReq.getRequestURI().substring(httpReq.getContextPath().length());
+		String uri = httpReq.getRequestURI();
 		
-		if(excludeCheck(reqUrl)) {
-			chain.doFilter(request, response);
-			return;
-		}
+		MemberVO loginUser = (MemberVO) httpReq.getSession().getAttribute("loginUser");
 		
-		HttpSession session = httpReq.getSession();
-		MemberVO loginUser = (MemberVO) session.getAttribute("loginUser");
-		
-		// enabled 확인
-		if(loginUser.getEnabled() != 1) {	//비활성화 상태
-			String url = "commons/disabled";
-			ViewResolver.view(httpReq, httpResp, url);
-		} else {
-			chain.doFilter(request, response);			
-		}
-	}
-	
-	private boolean excludeCheck(String url) {
-		for(String URL : checkURLs) {
-			if(url.contains(URL)) {
-				return false;
+		if( loginUser!=null && loginUser.getEnabled()!=1 ) {
+			for (String url : checkURLs) {	
+				if (uri.contains(url)) {
+					url="commons/checkDisabled";
+					ViewResolver.view(httpReq, httpResp, url);
+					return;
+				}
 			}
 		}
-		return true;
-	}
+		
+		chain.doFilter(request, response);			
+		
+		
+		
+	}  
 
+	
 	public void init(FilterConfig fConfig) throws ServletException {
-		String excludeURLNames=fConfig.getInitParameter("disabled");
-		StringTokenizer st= new StringTokenizer(excludeURLNames,",");
-		while(st.hasMoreTokens()){
+		String paramValue = fConfig.getInitParameter("checkURL");
+		StringTokenizer st = new StringTokenizer(paramValue,",");
+		while(st.hasMoreTokens()) {
 			String urlKey = st.nextToken();
 			checkURLs.add(urlKey);
-		}	
+		}
 	}
 
 }
+
+
+
+
+
