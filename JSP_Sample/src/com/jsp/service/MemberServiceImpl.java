@@ -1,5 +1,7 @@
 package com.jsp.service;
 
+import java.util.List;
+
 import com.jsp.dao.MemberDaoImpl;
 import com.jsp.dto.MemberVO;
 
@@ -31,6 +33,12 @@ public class MemberServiceImpl implements MemberService {
 	public int joinMember(MemberVO paramVO) {
 		
 		return dao.joinMember(paramVO);
+	}
+
+	@Override
+	public List<MemberVO> getMemberList() {
+
+		return dao.getMemberList();
 	}
 
 }

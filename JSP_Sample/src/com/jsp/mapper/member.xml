@@ -5,22 +5,23 @@
 <sqlMap namespace="member">
 
 	<select id="loginCheck" resultClass="MemberVO">
-	SELECT *
-	FROM member
-	WHERE id = #id#
-	AND pwd = #pwd#
+		SELECT *
+		FROM member
+		WHERE id = #id#
+		AND pwd = #pwd#
 	</select>
 	
 	<insert id="join" parameterClass="MemberVO" >
-	INSERT INTO
-	member
-	(id, pwd, name,  phone, address, email)
-	VALUES
-	(#id#, #pwd#, #name#,  #phone#, #address#, #email#)
+		INSERT INTO
+		member
+		(id, pwd, name,  phone, address, email)
+		VALUES
+		(#id#, #pwd#, #name#,  #phone#, #address#, #email#)
 	</insert>
-</sqlMap>			
-
-
-
-
-
+	
+	<select id="getMemberList" resultClass="MemberVO">
+		SELECT *
+		FROM member
+	</select>
+	
+</sqlMap>

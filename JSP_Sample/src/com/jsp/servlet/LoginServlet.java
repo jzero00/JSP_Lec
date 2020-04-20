@@ -25,10 +25,8 @@ public class LoginServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		request.setCharacterEncoding("utf-8");
-		
-		String url = "/WEB-INF/views/common/login_success.jsp";
-		
+		String url = "redirect:/main";
+						
 		String id = request.getParameter("id");
 		String pwd = request.getParameter("pwd");
 		
@@ -53,7 +51,7 @@ public class LoginServlet extends HttpServlet {
 			HttpSession session = request.getSession();
 			session.setAttribute("loginUser", user);
 		}
-		request.getRequestDispatcher(url).forward(request, response);
+		ViewResolver.view
 	}
 
 }

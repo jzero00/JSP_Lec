@@ -13,14 +13,24 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <meta http-equiv="x-ua-compatible" content="ie=edge">
 
   <title>로그인 페이지</title>
-
+<!-- icheck bootstrap -->
+<link rel="stylesheet" href="<%=request.getContextPath() %>/resources/bootstrap/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
   <!-- Font Awesome Icons -->
   <link rel="stylesheet" href="<%=request.getContextPath() %>/resources/bootstrap/plugins/fontawesome-free/css/all.min.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="<%=request.getContextPath() %>/resources/bootstrap/dist/css/adminlte.min.css">
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+<style>
+body{
+	background-image:url('<%=request.getContextPath()%>/resources/images/intro.jpg');
+	background-position:center;
+	background-size:cover;
+	background-repeat:no-repeat;
+}
+</style>
 </head>
+<body>
 <div class="wrapper">
   <div class="row">
 	  <div class="col-sm-4">
@@ -57,14 +67,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
 </div>
 <!-- ./wrapper -->
 <!-- REQUIRED SCRIPTS -->
-
+</body>
 <!-- jQuery -->
 <script src="<%=request.getContextPath() %>/resources/bootstrap/plugins/jquery/jquery.min.js"></script>
 <!-- Bootstrap 4 -->
 <script src="<%=request.getContextPath() %>/resources/bootstrap/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- AdminLTE App -->
 <script src="<%=request.getContextPath() %>/resources/bootstrap/dist/js/adminlte.min.js"></script>
-</body>
+
 <script>
 	if("${param.id}" != ""){
 		alert("아이디 혹은 패스워드가 일치하지 않습니다.");

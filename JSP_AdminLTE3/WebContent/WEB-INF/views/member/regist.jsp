@@ -105,8 +105,7 @@
 						<div class="form-group row">
 							<label for="email" class="col-sm-3" style="font-size:0.9em;">이메일</label>
 							<div class="col-sm-9 input-group-sm">
-								<input name="email" type="email" class="form-control" id="email"
-										placeholder="example@naver.com">
+								<input name="email" type="email" class="form-control" id="email" placeholder="example@naver.com">
 							</div>
 						</div>
 						<div class="form-group row">
