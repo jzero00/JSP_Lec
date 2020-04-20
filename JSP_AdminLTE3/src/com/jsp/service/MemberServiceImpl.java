@@ -17,8 +17,7 @@ public class MemberServiceImpl implements MemberService {
 	// 싱글톤 패턴 구현
 	private static MemberServiceImpl instance = new MemberServiceImpl();
 
-	private MemberServiceImpl() {
-	}
+	private MemberServiceImpl() {	}
 
 	public static MemberServiceImpl getInstance() {
 		return instance;

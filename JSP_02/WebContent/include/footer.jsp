@@ -2,4 +2,4 @@
     pageEncoding="UTF-8"%>
 <%@ page trimDirectiveWhitespaces="true" %>
 <hr/>
-<h1>footer.jsp : <%=msg %></h1>
+<%-- <h1>footer.jsp : <%=msg %></h1> --%>

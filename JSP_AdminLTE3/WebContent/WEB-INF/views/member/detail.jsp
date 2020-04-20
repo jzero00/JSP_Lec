@@ -108,7 +108,7 @@
 </form>
 
 <script>
-	var imageURL="picture/get?picture=${member.picture}";
+	var imageURL="picture/get.do?picture=${member.picture}";
 	$('div#pictureView').css({'background-image':'url('+imageURL+')',
 							  'background-position':'center',
 							  'background-size':'cover',
@@ -116,7 +116,7 @@
 	});
 	
 	$('button#modifyBtn').on('click', function(){
-		location.href="modify?id=${member.id}";
+		location.href="modifyForm.do?id=${member.id}";
 	})
 	
 	$('button#deleteBtn').on('click', function(){
@@ -127,7 +127,7 @@
 			type:"get",
 			success:function(data){
 				if(data == "SUCCESS"){
-					location.href="remove?id=${member.id}";
+					location.href="remove.do?id=${member.id}";
 				} else {
 					alert("패스워드가 일치하지 않습니다.");
 				}
@@ -137,15 +137,15 @@
 	});
 	
 	$('button#disabledBtn').on('click', function(){
-		location.href="disabled?id=${member.id}";
+		location.href="disabled.do?id=${member.id}";
 	})
 	
 	$('button#abledBtn').on('click', function(){
-		location.href="abled?id=${member.id}";
+		location.href="abled.do?id=${member.id}";
 	})
 	
 	$('button#deleteBtn').on('click', function(){
-		location.href="delete?id=${member.id}";
+		location.href="delete.do?id=${member.id}";
 	})
 </script>
 <%-- <%@ include file="/WEB-INF/views/include/open_footer.jsp" %> --%>

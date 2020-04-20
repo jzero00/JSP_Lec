@@ -45,7 +45,7 @@
 					</div>
 				</div>
 				<div class="register-card-body">
-					<form role="form" class="form-horizontal" action="regist" method="post">						
+					<form role="form" class="form-horizontal" action="regist.do" method="post">						
 						<input type="hidden" name="picture" />
 						<div class="input-group mb-3">
 							<div class="mailbox-attachments clearfix" style="text-align: center;">
@@ -138,7 +138,7 @@
 <!-- /.content-wrapper -->
 
 
-<form role="imageForm" action="upload/picture" method="post" 
+<form role="imageForm" action="picture/upload.do" method="post" 
 		enctype="multipart/form-data">
 	<input id="inputFile" name="pictureFile" type="file" class="form-control" style="display:none;">
 	<input id="oldFile" type="hidden" name="oldPicture" value="" />
