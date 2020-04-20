@@ -36,7 +36,7 @@
 			AND content LIKE '%'||#{keyword}||'%'			
 		</if>		
 	</sql>	
-	<select id="selectSearchMemberList" resultType="board">
+	<select id="selectBoardCriteria" resultType="board">
 		SELECT * 
 		FROM board
 		WHERE bno IS NOT NULL
