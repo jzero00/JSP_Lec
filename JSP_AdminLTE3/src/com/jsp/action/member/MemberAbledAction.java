@@ -10,9 +10,16 @@ import javax.servlet.http.HttpSession;
 
 import com.jsp.action.Action;
 import com.jsp.dto.MemberVO;
+import com.jsp.service.MemberService;
 import com.jsp.service.MemberServiceImpl;
 
 public class MemberAbledAction implements Action {
+
+	private MemberService memberService;
+	
+	public void setMemberService(MemberService memberService) {
+		this.memberService = memberService;
+	}
 
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response)
@@ -27,7 +34,7 @@ public class MemberAbledAction implements Action {
 			url = "member/abled_denied";
 		} else {	//로그인 사용자가 아닐경우 실행.
 			try {
-				MemberServiceImpl.getInstance().enabled(id);
+				memberService.enabled(id);
 				request.setAttribute("id", id);
 			} catch (SQLException e) {
 				e.printStackTrace();

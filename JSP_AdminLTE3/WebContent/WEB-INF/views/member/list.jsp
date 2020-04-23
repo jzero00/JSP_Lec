@@ -51,8 +51,7 @@
 						<option value="p"  ${pageMaker.cri.searchType eq 'p' ? 'selected':''}>전화번호</option>
 						<option value="e"  ${pageMaker.cri.searchType eq 'e' ? 'selected':''}>이메일</option>
 					</select>			
-					<input  class="form-control" type="text" name="keyword" 
-					placeholder="검색어를 입력하세요." value="${param.keyword }"/>
+					<input  class="form-control" type="text" name="keyword" placeholder="검색어를 입력하세요." value="${param.keyword }"/>
 					<span class="input-group-append">
 						<button class="btn btn-primary" type="button" 
 						id="searchBtn" data-card-widget="search" onclick="searchList_go(1);">

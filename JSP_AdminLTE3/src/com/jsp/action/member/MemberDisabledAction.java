@@ -10,10 +10,15 @@ import javax.servlet.http.HttpSession;
 
 import com.jsp.action.Action;
 import com.jsp.dto.MemberVO;
+import com.jsp.service.MemberService;
 import com.jsp.service.MemberServiceImpl;
 
 public class MemberDisabledAction implements Action {
-
+	private MemberService memberService;
+	
+	public void setMemberService(MemberService memberService) {
+		this.memberService = memberService;
+	}
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -28,7 +33,7 @@ public class MemberDisabledAction implements Action {
 			url = "member/disabled_denied";
 		} else {	//로그인 사용자가 아닐경우 실행.
 			try {
-				MemberServiceImpl.getInstance().disabled(id);
+				memberService.disabled(id);
 				request.setAttribute("id", id);
 			} catch (SQLException e) {
 				e.printStackTrace();

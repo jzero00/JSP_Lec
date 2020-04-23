@@ -13,7 +13,8 @@ import com.jsp.service.BoardService;
 
 public class BoardModifyFormAction implements Action {
 
-	private BoardService boardService;	//=BoardServiceImpl.getInstance();
+	private BoardService boardService;// = BoardServiceImpl.getInstance();
+
 	public void setBoardService(BoardService boardService) {
 		this.boardService = boardService;
 	}
@@ -23,18 +24,17 @@ public class BoardModifyFormAction implements Action {
 		
 		String url = "/board/modifyBoard";
 	
+		int bno = Integer.parseInt(request.getParameter("bno"));
+		
+		BoardVO board = null;
+		
 		try {
-			int bno = Integer.parseInt(request.getParameter("bno"));
-			
-			BoardVO board = boardService.getBoardForModify(bno);
-			
-			request.setAttribute("board", board);
+			board = boardService.getBoard(bno);
 		} catch (SQLException e) {
 			e.printStackTrace();
-			url = "error/500_error";
 		}
 		
-		
+		request.setAttribute("board", board);
 		return url;
 	}
 

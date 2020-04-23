@@ -13,11 +13,10 @@ import com.jsp.dto.MemberVO;
 import com.jsp.exception.InvalidPasswordException;
 import com.jsp.exception.NotFoundIDException;
 import com.jsp.service.MemberService;
-import com.jsp.service.MemberServiceImpl;
 
 public class LoginAction implements Action {
 
-	private MemberService memberService = MemberServiceImpl.getInstance();
+	private MemberService memberService;// = MemberServiceImpl.getInstance();
 	public void setMemberService(MemberService memberService) {
 		this.memberService = memberService;
 	}
@@ -29,14 +28,12 @@ public class LoginAction implements Action {
 		String url="redirect:/member/list.do";
 		
 		String id=request.getParameter("id");
-		String pwd=request.getParameter("pwd");		
-		
+		String pwd=request.getParameter("pwd");	
 		HttpSession session = request.getSession();		
 		
 		
 		try {
 			memberService.login(id, pwd);
-			
 			MemberVO loginUser = memberService.getMember(id);
 			session.setAttribute("loginUser", loginUser);
 			session.setMaxInactiveInterval(60*60);

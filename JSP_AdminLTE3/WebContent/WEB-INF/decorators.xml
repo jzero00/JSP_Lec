@@ -10,7 +10,7 @@
 	<decorator name="open_window" page="open_decorator.jsp">
 		<pattern>/**/regist*</pattern>			
 		<pattern>/**/modify*</pattern>			
-		<pattern>/**/detail*</pattern>			
+		<pattern>/**/detail*</pattern>		
 	</decorator>
 
 		

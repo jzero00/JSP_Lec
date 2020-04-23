@@ -86,7 +86,7 @@
 					</div>
 					<div class="card-footer">
 						<label for="newReplyWriter">Writer</label>
-						<input class="form-control" type="text" placeholder="USER ID" 
+						<input class="form-control" type="hidden" placeholder="USER ID"
 							   id="newReplyWriter" readonly value="${loginUser.id }"> 
 						<label for="newReplyText">Reply Text</label>
 						<input class="form-control" type="text"	placeholder="REPLY TEXT" 
@@ -109,10 +109,8 @@
   	<input type='hidden' name='bno' value ="${board.bno}">
   	<input type='hidden' name='page' value ="${param.page}">
     <input type='hidden' name='perPageNum' value ="${param.perPageNum}">
-    <input type='hidden' name="searchType" 
-		         value="${param.searchType }" />
-	<input type='hidden' name="keyword" 
-		         value="${param.keyword }" />
+    <input type='hidden' name="searchType" value="${param.searchType }" />
+	<input type='hidden' name="keyword" value="${param.keyword }" />
   </form>
 
 <!-- Modal -->
@@ -138,7 +136,7 @@
 	
 	<jsp:include page="detailBoard_js.jsp"></jsp:include>
 	
-<%-- 	<%@ include file="reply_js.jsp" %> --%>
+	<%@ include file="reply_js.jsp" %>
 	
 		
 </body>

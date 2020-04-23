@@ -12,12 +12,13 @@ public interface MemberDAO {
 	List<MemberVO> selectMemberList() throws SQLException;
 	List<MemberVO> selectMemberList(SearchCriteria cri) throws SQLException;
 	
-	
 	//전체 회원리스트 개수	
 	int selectMemberListCount()throws SQLException;
-	
-	//검색 결과의 전체 리스트 개수
+
+	// 검색 결과의 전체 리스트 개수
 	int selectMemberListCount(SearchCriteria cri) throws SQLException;
+	
+	
 	
 	//회원정보 조회
 	MemberVO selectMemberById(String id) throws SQLException;
@@ -31,12 +32,11 @@ public interface MemberDAO {
 	//회원정보 삭제
 	void deleteMember(String id) throws SQLException;	
 	
-	//회원 활성화
-	void enabledMember(String id) throws SQLException;
-	
-	//회원 비활성화
+	//회원정지
 	void disabledMember(String id) throws SQLException;
 	
+	//회원 활성화
+	void enabledMember(String id) throws SQLException;
 	
 }
 

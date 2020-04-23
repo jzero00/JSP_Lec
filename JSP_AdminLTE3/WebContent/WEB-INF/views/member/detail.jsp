@@ -145,7 +145,7 @@
 	})
 	
 	$('button#deleteBtn').on('click', function(){
-		location.href="delete.do?id=${member.id}";
+		location.href="remove.do?id=${member.id}";
 	})
 </script>
 <%-- <%@ include file="/WEB-INF/views/include/open_footer.jsp" %> --%>
