@@ -13,7 +13,7 @@ public class BoardRegistFormAction implements Action {
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response)	throws ServletException, IOException {
 		
-		String url = "/board/registForm";
+		String url = "/board/registBoard";
 		
 		return url;
 	}

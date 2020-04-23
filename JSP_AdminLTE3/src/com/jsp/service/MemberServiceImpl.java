@@ -15,13 +15,11 @@ import com.jsp.request.SearchCriteria;
 public class MemberServiceImpl implements MemberService {
 
 	// 싱글톤 패턴 구현
-	private static MemberServiceImpl instance = new MemberServiceImpl();
-
-	private MemberServiceImpl() {	}
-
-	public static MemberServiceImpl getInstance() {
-		return instance;
-	}
+	/*
+	 * private static MemberServiceImpl instance = new MemberServiceImpl(); private
+	 * MemberServiceImpl() {} public static MemberServiceImpl getInstance() { return
+	 * instance;}
+	 */
 
 	private MemberDAO memberDAO; // =MemberDAOImpl.getInstance();
 
@@ -77,7 +75,7 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public Map<String,Object> getMemberList(SearchCriteria cri) throws SQLException {
+	public Map<String, Object> getMemberList(SearchCriteria cri) throws SQLException {
 		List<MemberVO> memberList = memberDAO.selectMemberList(cri);
 
 		PageMaker pageMaker = new PageMaker();
@@ -87,7 +85,7 @@ public class MemberServiceImpl implements MemberService {
 		Map<String, Object> dataMap = new HashMap<String, Object>();
 		dataMap.put("memberList", memberList);
 		dataMap.put("pageMaker", pageMaker);
-		
+
 		return dataMap;
 	}
 

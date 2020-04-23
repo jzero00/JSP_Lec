@@ -1,61 +1,77 @@
 package com.jsp.listener;
 
 import java.lang.reflect.Method;
+import java.util.Enumeration;
+import java.util.Map;
 
+import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
 
-import org.apache.ibatis.session.SqlSessionFactory;
-
-import com.jsp.dao.BoardDAO;
-import com.jsp.dao.MemberDAO;
-import com.jsp.service.BoardServiceImpl;
-import com.jsp.service.MemberServiceImpl;
+import com.jsp.action.ApplicationContext;
 
 @WebListener
 public class InitListener implements ServletContextListener {
 
-    public void contextDestroyed(ServletContextEvent ctxEvent)  { 
-         // TODO Auto-generated method stub
-    }
+	public void contextDestroyed(ServletContextEvent ctxEvent) {
+		// TODO Auto-generated method stub
+	}
 
-	
-    public void contextInitialized(ServletContextEvent ctxEvent)  { 
-         String sqlSessionFactoryType = 
-        		 ctxEvent.getServletContext().getInitParameter("sqlSessionFactory");
-         String memberDAOType = ctxEvent.getServletContext().getInitParameter("memberDAO");
-         String boardDAOType = ctxEvent.getServletContext().getInitParameter("boardDAO");
-         
-         try {
-        	 
-	         SqlSessionFactory sqlSessionFactory = 
-	        		 (SqlSessionFactory)Class.forName(sqlSessionFactoryType).newInstance();
-	         
-	         
-	         Class<?> memDao = Class.forName(memberDAOType);     
-	         Class<?> borDao = Class.forName(boardDAOType);     
-	         
-	         Method setSqlSessionFactory1
-	         	= memDao.getMethod("setSessionFactory", SqlSessionFactory.class);
-	         Method setSqlSessionFactory2
-	         = borDao.getMethod("setSessionFactory", SqlSessionFactory.class);
-	         
-	         Object obj1 = memDao.newInstance();
-	         Object obj2 = borDao.newInstance();
-	         setSqlSessionFactory1.invoke(obj1, sqlSessionFactory);
-	         setSqlSessionFactory2.invoke(obj2, sqlSessionFactory);
-	         
-	         MemberDAO memberDAO = (MemberDAO)obj1;
-	         BoardDAO boardDAO = (BoardDAO)obj2;
-	         
-	         MemberServiceImpl.getInstance().setMemberDAO(memberDAO);
-	         BoardServiceImpl.getInstance().setBoardDAO(boardDAO);
-	         
-         }catch(Exception e) {
-        	 e.printStackTrace();
-         }
-                        
-    }
-	
+	public void contextInitialized(ServletContextEvent ctxEvent) {
+
+		Map<String, Object> applicationContext = ApplicationContext.getApplicationContext();
+
+		ServletContext ctx = ctxEvent.getServletContext();
+
+		// 1. 인스턴스 생성 contextparam 기준으로
+		Enumeration<String> paramNames = ctx.getInitParameterNames();
+		
+		while (paramNames.hasMoreElements()) {
+			String paramName = paramNames.nextElement();
+			String classType = ctx.getInitParameter(paramName);
+			try {
+				Class<?> cls = Class.forName(classType);
+
+				Object targetObj = cls.newInstance();
+
+				applicationContext.put(paramName, targetObj);
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
+		}
+		
+		// 2. 인스턴스 의존성 확인 및 조립 iterator는 기존에 불렀던것을 다시 불러오지 않음 따라서 다시 처음부터 불러옴
+		paramNames = ctx.getInitParameterNames();
+		while (paramNames.hasMoreElements()) {
+			String paramName = paramNames.nextElement();
+			String classType = ctx.getInitParameter(paramName);
+			
+			try {
+				Class<?> cls = Class.forName(classType);
+
+				Method[] methods = cls.getMethods();
+
+				for (Method method : methods) {
+					//의존성 여부 확인
+					if (method.getName().contains("set")) {
+						
+						System.out.println(method.getName());
+						
+						String setInstanceName = ((method.getName().replace("set", "")).charAt(0) + "").toLowerCase()
+								+ method.getName().substring(4);
+						
+						method.invoke(applicationContext.get(paramName), applicationContext.get(setInstanceName));
+					}
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+		}
+		System.out.println(applicationContext);
+	}
+
 }

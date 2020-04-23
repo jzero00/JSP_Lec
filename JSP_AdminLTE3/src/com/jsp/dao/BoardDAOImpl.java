@@ -11,7 +11,6 @@ import com.jsp.dto.BoardVO;
 import com.jsp.request.SearchCriteria;
 
 public class BoardDAOImpl implements BoardDAO {
-
 	private SqlSessionFactory sessionFactory;
 
 	public void setSessionFactory(SqlSessionFactory sessionFactory) {
@@ -26,27 +25,26 @@ public class BoardDAOImpl implements BoardDAO {
 		int limit = cri.getPerPageNum();
 		RowBounds rowBounds = new RowBounds(offset, limit);
 
-		List<BoardVO> boardList = null;
-
-		boardList = session.selectList("Board-Mapper.selectBoardCriteria", cri, rowBounds);
-
+		List<BoardVO> boardList = session.selectList("Board-Mapper.selectBoardCriteria", cri, rowBounds);
 		session.close();
+
 		return boardList;
 	}
 
 	@Override
 	public int selectBoardCriteriaTotalCount(SearchCriteria cri) throws SQLException {
-		int count = 0;
 		SqlSession session = sessionFactory.openSession();
-		count = session.selectOne("Board-Mapper.selectBoardCriteriaTotalCount", cri);
+
+		int count = session.selectOne("Board-Mapper.selectBoardCriteriaTotalCount", cri);
+		session.close();
 		return count;
 	}
 
 	@Override
 	public BoardVO selectBoardByBno(int bno) throws SQLException {
-		BoardVO board = null;
 		SqlSession session = sessionFactory.openSession();
-		board = session.selectOne("Board-Mapper.selectBoardByBno", bno);
+		BoardVO board = session.selectOne("Board-Mapper.selectBoardByBno", bno);
+		session.close();
 		return board;
 	}
 
@@ -80,14 +78,16 @@ public class BoardDAOImpl implements BoardDAO {
 
 	@Override
 	public int selectBoardSeqNext() throws SQLException {
-		int count = 0;
 		SqlSession session = sessionFactory.openSession();
-		try {
-			count = session.selectOne("Board-Mapper.selectBoardSeqNext", null);
-		} finally {
-			session.close();
-		}
-		return count;
+		int seq_num = session.selectOne("Board-Mapper.selectBoardSeqNext");
+		session.close();
+		return seq_num;
 	}
 
+	@Override
+	public void modifyViewCntForModify(int bno) throws SQLException {
+		SqlSession session = sessionFactory.openSession(true);
+		session.update("Board-Mapper.modifyViewCntForModify", bno);
+		session.close();
+	}
 }
