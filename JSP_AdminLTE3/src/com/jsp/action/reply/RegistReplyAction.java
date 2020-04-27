@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jsp.action.Action;
 import com.jsp.request.PageMaker;
+import com.jsp.request.ReplyDeleteRequest;
 import com.jsp.request.ReplyRegistRequest;
 import com.jsp.request.SearchCriteria;
 import com.jsp.service.ReplyService;

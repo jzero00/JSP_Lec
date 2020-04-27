@@ -25,6 +25,45 @@ function SubmitMemberRegist(formRole){
 		//$('input[name="pictureFile"]').click();
 		return;
 	}
+	/* 유효성 검사 부분 함수로 만들기
+	 * var id = $('input[name=name]').val();
+	 * alert(id);
+	 */
+//	var flag = false;
+//	form_valid(flag);
+	var check = function form_valid(){
+		idCheck();
+	}
+	if(check == false){
+		return;
+	}
+	
 	var form = $('form[role="'+formRole+'"]');
 	form.submit();
+}
+
+
+
+
+function idCheck(){
+	
+	var id = $('input[name=id]').val().trim();
+	var idlen = id.length;
+	alert(id);
+	alert(idlen);
+	if(idlen == 0){
+		alert("ID를 입력하세요.");
+		return false;
+	}
+	if(idlen < 8 || idlen > 12 ) {
+		alert("ID는 8~12자리 사이로 입력하세요.");
+		return false;
+	}
+	
+	idreg = /^[0-9a-zA-Z]{8,12}$/;
+	if(!(idreg.test(id))){
+		alert("ID 형식 오류..");
+		return false;
+	}
+	return true;
 }
