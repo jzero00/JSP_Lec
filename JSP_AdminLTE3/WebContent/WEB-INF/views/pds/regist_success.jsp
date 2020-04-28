@@ -3,7 +3,7 @@
 <%@ page trimDirectiveWhitespaces="true" %>
 
 <script>
-	alert("자료 등록에 성공했습니다.");
+	alert("자료등록이 성공했습니다.");
 	window.close();
-	window.opener.location.href="list.do?page=1&perPageNum=10"
+	window.opener.location.href="list.do?page=1&perPageNum=10";	
 </script>

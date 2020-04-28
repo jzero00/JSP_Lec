@@ -30,3 +30,5 @@ $('#registBtn').on('click',function(e){
 	form.submit();
 });
 </script>
+
+

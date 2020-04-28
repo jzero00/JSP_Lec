@@ -3,7 +3,8 @@
 <%@ page trimDirectiveWhitespaces="true" %>
 
 <script>
-$('#addFileBtn').on('click', function(event){
+$('#addFileBtn').on('click',function(event){
+	
 	if($('input[name="uploadFile"]').length >=5){
 		alert("파일추가는 5개까지만 가능합니다.");
 		return;
@@ -14,7 +15,8 @@ $('#addFileBtn').on('click', function(event){
 	var div=$('<div>').addClass("inputRow");
 	div.append(input).append("<button style='border:0;outline:0;' class='badge bg-red' type='button'>X</button");
 	div.appendTo('.fileInput');
-})
+});
+
 
 $('div.fileInput').on('click','div.inputRow > button',function(event){
 	$(this).parent('div.inputRow').remove();
@@ -28,20 +30,9 @@ $('.fileInput').on('change','input[type="file"]',function(event){
 		return false;
 	} 
 });
-$('#registBtn').on('click', function(){
-// 	alert('등록버튼 클릭!!');
-	var form = document.registForm;
-	
-	if(form.title.value==""){
-		alert("제목은 필수입니다.");
-		return;
-	}
-	
-	if(form.content.value.length>1000){
-		alert("글자수가 1000자를 초과할 수 없습니다.");
-		return;
-	}
-	
-	form.submit();
-})
 </script>
+
+
+
+
+

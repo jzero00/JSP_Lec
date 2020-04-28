@@ -13,7 +13,8 @@
 		</li>
 		<li class="page-item">
 			<a class="page-link" href="javascript:searchList_go(
-			${pageMaker.prev ? pageMaker.startPage-1 : 1});"><i class="fas fa-angle-left"></i></a>
+			${pageMaker.prev ? pageMaker.startPage-1 : 1}				
+			);"><i class="fas fa-angle-left"></i></a>
 		</li>
 		<c:forEach begin="${pageMaker.startPage }" end="${pageMaker.endPage }" var="pageNum">						
 		<li class="page-item 
@@ -28,9 +29,9 @@
 			);"><i class="fas fa-angle-right" ></i></a>
 		</li>
 		<li class="page-item">
-			<a class="page-link" href="javascript:searchList_go(${pageMaker.realEndPage} );">
-			<i class="fas fa-angle-double-right"></i>
-			</a>
+			<a class="page-link" href="javascript:searchList_go(
+				${pageMaker.realEndPage} );">
+				<i class="fas fa-angle-double-right"></i></a>
 		</li>	
 	</ul>
 </nav>   	
@@ -44,13 +45,23 @@
 
 
 <script>
-function searchList_go(page){
+function searchList_go(page,url){
 	
 	var jobForm=$('#jobForm');
 	jobForm.find("[name='page']").val(page);
 	jobForm.find("[name='searchType']").val($('select[name="searchType"]').val());
-	jobForm.find("[name='keyword']").val($('div.input-group>input[name="keyword"]').val());	
-	jobForm.attr("action","list.do").attr("method","post");
+	jobForm.find("[name='keyword']").val($('div.input-group>input[name="keyword"]').val());
+	jobForm.attr("method","post");
+	if(url){
+		jobForm.attr("action",url)
+	}else{
+		jobForm.attr("action","list.do")
+	}
+	
 	jobForm.submit();
 }
 </script>
+
+
+
+

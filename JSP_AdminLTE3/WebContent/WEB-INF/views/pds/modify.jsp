@@ -59,7 +59,9 @@
 											<c:forEach items="${pds.attachList }" var="attach" >
 											<li class="attach-item">																			
 												<div class="mailbox-attachment-info">
-													<a class="mailbox-attachment-name" attach-fileName="${attach.fileName }" attach-no="${attach.ano }" href="<%=request.getContextPath()%>/attach/getFile.do?pno=${pds.pno }&ano=${attach.ano }" name="attachedFile" >													
+													<a class="mailbox-attachment-name" name="attachedFile" 
+														attach-fileName="${attach.fileName }" attach-no="${attach.ano }" 
+														href="<%=request.getContextPath()%>/attach/getFile.do?pno=${pds.pno }&ano=${attach.ano }"  >													
 														<i class="fas fa-paperclip"></i>
 														${attach.fileName }&nbsp;&nbsp;
 														<button type="button" style="border:0;outline:0;" class="badge bg-red">X</button>																									
@@ -114,7 +116,7 @@ $('#modifyBtn').on('click',function(e){
 		alert("글자수가 1000자를 초과할 수 없습니다.");
 		return;
 	}
-	location.href='modify.do?pno=${pds.pno}';
+	
 	form.submit();
 	
 });

@@ -45,7 +45,7 @@
 				<button type="button" class="btn btn-primary" id="registBtn" onclick="OpenWindow('registForm.do','자료등록',600,400)">자료등록</button>
 				<div id="keyword" class="card-tools" style="width:350px;">	
 					<div class="input-group row">
-						
+					
 						<select class="form-control" name="searchType" id="searchType">
 							<option value="tcw" ${pageMaker.cri.searchType eq 'tcw' ? 'selected':'' }>전 체</option>
 							<option value="t" ${pageMaker.cri.searchType eq 't' ? 'selected':'' }>제 목</option>
@@ -67,26 +67,27 @@
 			<div class="card-body">
 				<table class="table table-bordered text-center">
 					<tr style="font-size:0.95em;">
-						<th style="width: 10%;">번 호</th>
-						<th style="width: 50%;">제 목</th>
-						<th style="width: 15%;">작성자</th>
-						<th style="width: 10%;">등록일</th>
-						<th style="width: 15%;">등록일</th>						
-					</tr>
-					<c:if test="${empty dataMap.pdsList }">
+						<th style="width:10%;">번 호</th>
+						<th style="width:50%;">제 목</th>
+						<th style="width:15%;">작성자</th>
+						<th>등록일</th>
+						<th style="width:10%;">조회수</th>
+					</tr>	
+					<c:if test="${empty dataMap.pdsList }" >
 						<tr>
 							<td colspan="5">
 								<strong>해당 내용이 없습니다.</strong>
 							</td>
 						</tr>
-					</c:if>
+					</c:if>	
 					<c:forEach items="${dataMap.pdsList }" var="pds">
 						<tr>
 							<td>${pds.pno }</td>
-							<td id="pdsTitle" style="text-align: left;max-width: 100%; overflow: hidden;white-space: nowrap; text-overflow: ellipsis;">
-							<a href="javascript:OpenWindow('detail.do?pno=${pds.pno }','상세보기',600,400);">
-								<span class="col-sm-12">${pds.title }</span>
-							</a>
+							<td id="pdsTitle" style="text-align:left;max-width: 100%; 
+								overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">
+								<a href="javascript:OpenWindow('detail.do${pageMaker.makeQuery() }&pno=${pds.pno }','상세보기',600,400);">
+									<span class="col-sm-12 ">${pds.title }</span>
+								</a>
 							</td>
 							<td>${pds.writer }</td>
 							<td>
@@ -94,7 +95,7 @@
 							</td>
 							<td><span class="badge bg-red">${pds.viewcnt }</span></td>
 						</tr>
-					</c:forEach>
+					</c:forEach>		
 				</table>
 			</div>
 			<div class="card-footer">
@@ -118,6 +119,7 @@
 		  <input type='hidden' name="keyword" 
 		         value="${pageMaker.cri.keyword }" />
 	</form>
+
 <script>
 $('#searchBtn').on('click',function(e){
 	
@@ -126,15 +128,17 @@ $('#searchBtn').on('click',function(e){
 	jobForm.find("[name='searchType']").val($('select[name="searchType"]').val());
 	jobForm.find("[name='keyword']").val($('input[name="keyword"]').val());
 	
-// 	alert(jobForm.serialize())''
-
+	/* alert(jobForm.serialize()); */
+	
+	
 	jobForm.attr("action","list.do").attr("method","get");
-	jobForm.submit();
+	jobForm.submit(); 
 });
-	
-	
+
 </script>
+ 
 </body>
+
 
 
 

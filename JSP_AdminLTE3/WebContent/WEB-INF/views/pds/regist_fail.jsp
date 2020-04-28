@@ -3,6 +3,6 @@
 <%@ page trimDirectiveWhitespaces="true" %>
 
 <script>
-	alert("자료 등록에 실패했습니다.");
+	alert("자료등록에 실패했습니다.");
 	history.go(-1);
 </script>

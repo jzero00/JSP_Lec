@@ -35,6 +35,10 @@ public class PageMaker {
 				+ "&keyword=" + cri.getKeyword();
 		return query;
 	}
+	
+	public String makeQuery() {
+		return makeQuery(cri.getPage());
+	}
 
 	public int getTotalCount() {
 		return totalCount;
