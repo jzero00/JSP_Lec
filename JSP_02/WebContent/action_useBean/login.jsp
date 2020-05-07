@@ -9,7 +9,7 @@
 	loginReq.setPwd(requset.getParameter("pwd"));
 --%>
 
-<jsp:useBean id="loginReq" class="com.jsp.request.LoginRequest">
+<jsp:useBean id="loginReq" class="com.spring.request.LoginRequest">
 </jsp:useBean>
 <jsp:setProperty property="*" name="loginReq"/>
 
